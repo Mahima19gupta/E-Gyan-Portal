@@ -1,0 +1,31 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">View Your Study Material</h1>   
+            <div class="row">
+                <div class="col-sm-12" style="overflow-x: scroll;">
+                    <table class="table table-bordered text-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Subject</th>
+                            <th>File Name</th>
+                            <th>Download</th>
+                        </tr>
+                        {% for m in mt %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>
+                                    {{m.subject}}
+                                </td>
+                                <td>{{m.file_name}}</td>
+                                <td><a download href="{{m.my_file.url}}">{{m.file_name}}</a></td>
+                            </tr>
+                        {% endfor %}
+                       
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,54 @@
+*copy template and static file of sir inside student app
+
+1. in nouapp login inside if
+code:- request.session['rollno']=userid
+
+2. in studentapp views studenthome 
+code update:-
+   try:
+        if request.session['rollno']!=None:
+            rollno=request.session['rollno']
+            stu=Student.objects.get(rollno=rollno)
+            return render(request,"studenthome.html",{'stu':stu})#stu is information stored in dictionary of student of particular rollno
+    except KeyError:
+        return redirect('nouapp:login')
+3.
+
+4.in studentapp studentparent.html #logout means session delete and return to login page
+in html file we will logout link in lineno-62 and at linenop-166 inside anchor tag
+code:-href="{%url 'studentapp:studentlogout' %}"
+
+5. in studentapp views create student logout
+code:-
+def studentlogout(request):
+    try:
+        del request .session['rollno'] #session delete
+    except KeyError:
+        return redirect('nouapp:login')
+    return redirect('nouapp:login')
+6.add path to the studentappurls of student logout
+code:-path('studentlogout/',views.studentlogout,name='studentlogout'),
+7. create model with name studentresponse
+with fields rollno,name,program,branch,year,contactno,emailaddress,responsetype,subject,responsetext,responsedate
+if primarykey is provided then django add primary field by name id 
+code:-
+class StuResponse(models.Model):
+    rollno=models.IntegerField()
+    name=models.CharField(max_length=50)
+    program=models.CharField(max_length=50)
+    branch=models.CharField(max_length=50)
+    year=models.CharField(max_length=50)
+    contactno=models.CharField(max_length=10)
+    emailaddress=models.CharField(max_length=50)
+    responsetype=models.CharField(max_length=50)
+    subject=models.CharField(max_length=500)
+    responsetext=models.CharField(max_length=1000)
+    responsedate=models.CharField(max_length=30)
+8.add model to studentapp admin
+	8.1-first import model
+	    code-from .models import StuResponse
+	8.2-second add model to admin
+	    code-admin.site.register(StuResponse)
+9. on terminal run
+command 9.1python manage.py makemigrations
+	9.2python manage.py migrate    

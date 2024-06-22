@@ -1,0 +1,37 @@
+{% extends "adminparent.html" %}
+{% block body %}
+<h1 class="text-center">Events</h1>
+<form class ="form-group "  method="post"  action={%url 'adminapp:news' %}>
+    {% csrf_token %}
+    <center>
+    <table class="table table-bordered text-light " style="width:70%;margin=auto;">
+        <tr>
+            <td>NOTICE</td>
+            <td>
+                <textarea class="form-control text-light" name="eventname"></textarea>
+            </td>
+        </tr>
+        <tr >
+            <td  colspan="2" ><center><button type="submit" class="btn btn-success">ADD EVENT</button></center></td>
+        </tr>
+    </table>
+    <div class="col-sm-12 " style="overflow-x: scroll;">
+        <table class="table table-bordered text-light">
+            <tr>
+                <th>#</th>
+                <th>Event</th>
+                <th>Eventdate</th>
+                <th>Delete</th>
+            {% for e in einfo %}
+            <tr>
+                <td>{{e.eventid}}</td>
+                <td>{{e.event}}</td>
+                <td>{{e.eventdate}}</td>
+                <td style="text-align:center;"><a href="{% url 'adminapp:deleteevent' eid=e.eventid  %}" style="color:green;" >Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+</center>
+</form>
+{% endblock body %}

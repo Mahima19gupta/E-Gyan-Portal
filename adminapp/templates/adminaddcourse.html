@@ -1,0 +1,41 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;color:white;">Add Course</h1>   
+              <head>
+  <style>
+  a:link {
+        text-decoration: none;
+      }
+    
+  </style>
+</head>
+<form class="form-group " action="{% url 'adminapp:adminaddcourse' %}" method="POST" enctype="multipart/form-data" autocomplete="off" style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+    <table class="table table-bordered text-light">
+      <tr>
+        <td>Course Name</td>
+        <td>
+            <input type="text" name="coursename" class="form-control text-light"/>
+        </td>
+    </tr>
+      <tr>       
+        <td>Total Question</td>
+        <td>
+            <input type="text" name="totalquestion" class="form-control text-light"/>
+        </td>
+    </tr>
+      <tr>       
+        <td>Total Marks</td>
+        <td>
+            <input type="text" name="totalmarks" class="form-control text-light"/>
+        </td>
+    </tr>  
+    </div>
+</table>
+<br/>
+    <button type="submit" class="btn btn-primary">ADD</button>
+  </form>
+<br><br><br>
+{% endblock body %}

@@ -1,0 +1,78 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Upload Study Material </h1> 
+            <form class="form-group " action="{% url 'adminapp:move' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="table table-bordered text-light">
+                    <tr>
+                        <td>Select Program</td>
+                        <td>
+                            <select name="program" class="form-control text-light">
+                                <option>--Select Program--</option>
+                                {% for p in program %}
+                                <option value="{{p.program}}">{{p.program}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+            
+                    </tr>
+                    <tr>
+                        <td>Select Branch </td>
+                        <td>
+                            <select name="branch" class="form-control text-light">
+                                <option>--Select branch--</option>
+                                {% for b in branch %}
+                                <option value="{{b.branch}}">{{b.branch}}</option>
+                                {% endfor %}
+                            </select>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Select Year </td>
+                        <td>
+                            <select name="year" class="form-control text-light">
+                                <option>--Select Year--</option>
+                                
+                                {% for y in year %}
+                                <option value="{{y.year}}">{{y.year}}</option>
+            
+                                {% endfor %}
+                            </select>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                
+                        <td>Enter Subject</td>
+                        <td>
+                            <input type="text" name="subject" class="form-control text-light"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Enter File Name</td>
+                        <td>
+                            <input type="text" name="filename" class="form-control text-light"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Select File </td>
+                        <td>
+                            <input type="file" name="myfile" class="form-control text-light"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>  
+              
+        </div>
+    </div>
+{% endblock body %}

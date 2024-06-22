@@ -1,0 +1,64 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Add Question</h1>   
+            <form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+                {%csrf_token%}
+                <div class="form-group">
+                    <table class="table table-bordered text-light">
+                        <tr>
+                          <td>Course</td>
+                          <td>
+                              <input type="text" name="course" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                        <tr>       
+                          <td>Question</td>
+                          <td>
+                              <input type="text" name="question" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                        <tr>       
+                          <td>Marks</td>
+                          <td>
+                              <input type="text" name="marks" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                        <tr>                
+                            <td>Option 1</td>
+                            <td>
+                                <input type="text" name="option1" class="form-control text-light"/>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>Option 2</td>
+                          <td>
+                              <input type="text" name="option2" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                        <tr>       
+                          <td>Option 3</td>
+                          <td>
+                              <input type="text" name="option3" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                        <tr>       
+                          <td>Option 4</td>
+                          <td>
+                              <input type="text" name="option4" class="form-control text-light"/>
+                          </td>
+                      </tr>
+                      <tr>       
+                        <td>Answer</td>
+                        <td>
+                            <input type="text" name="answer" class="form-control text-light"/>
+                        </td>
+                    </tr>
+                  </table>  
+                      </div>            
+                <button type="submit" class="btn btn-primary">ADD</button>
+              </form>             
+        </div>
+    </div>
+{% endblock body %}

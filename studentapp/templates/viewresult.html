@@ -1,0 +1,39 @@
+{% extends "studentparent.html" %}
+{% block body %}
+<style media="screen">
+  a:link {
+    text-decoration: none;
+  }
+
+  h6 {
+    text-align: center;
+  }
+
+  .row {
+    margin: 100px;
+  }
+</style>
+            <h1 style="text-align:center;">View Marks</h1>   
+            <div class="container">
+                <div class="panel panel-primary">
+                  <table class="table table-hover" id="dev-table">
+                    <thead>
+                      <tr>
+              
+                        <th>Exam Name</th>
+                        
+                        <th>View Marks</th>
+                      </tr>
+                    </thead>
+                    {% for t in courses %}
+                    <tr>
+              
+                      <td> {{t.course_name}}</td>
+                      
+                      <td><a class="btn btn-danger btn-xs" href="{% url 'studentapp:checkmarks' t.id  %}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
+{% endblock body %}

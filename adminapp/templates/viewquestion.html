@@ -1,0 +1,52 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">View Question</h1>   
+            <style media="screen">
+                a:link {
+                  text-decoration: none;
+                }
+            
+                h6 {
+                  text-align: center;
+                }
+            
+                .row {
+                  margin: 100px;
+                }
+              </style>
+            <br><br>
+            <div class="container">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h6 class="panel-title">Questions</h6>
+                </div>
+                <table class="table table-hover" id="dev-table">
+                  <thead>
+                    <tr>
+            
+                      <th>Question</th>
+                     
+                      <th>Marks</th>
+                      <th>Delete Question</th>
+                    </tr>
+                  </thead>
+                  {% for c in questions %}
+                  <tr>
+            
+                    <td> {{c.question}}</td>
+                    
+                    <td>{{c.marks}}</td>
+                    <td><a class="btn btn-primary btn-xs" href="{% url 'adminapp:deletequestion' c.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+            <br><br><br><br><br><br>
+        </div>
+    </div>
+{% endblock body %}
+ 

@@ -1,0 +1,95 @@
+{% extends 'parent.html' %}
+{% block main %}
+<script>
+  function validate()
+  {
+   var name=document.getElementById("name");
+   var contactno=document.getElementById("contactno");
+   var emailaddress=document.getElementById("emailaddress");
+   var emailexp=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+   if (name.value==""||name.value==null)
+   {
+    alert("Please Enter Name");
+    name.focus();
+   }
+   else if(contactno.value==""||contactno.value==null)
+   {
+    alert("Please Enter contact number");
+    contactno.focus();
+   }
+   else if(isNaN(contactno.value))
+   {
+    alert("Please Enter Numbers only");
+    contactno.focus();
+   }
+   else if(contactno.value.length!=10)
+   {
+    alert("please enter valid number");
+    contactno.focus;
+   }
+   else if(emailaddress.value==""||emailaddress.value==null)
+   {
+    alert("Please Enter Email Address");
+    emailaddress.focus();
+   }
+   else if(!emailexp.test(emailaddress.value))
+   {
+    alert("Emter valid Email Address");
+    emailaddress.focus();
+   }
+   else{
+    document.getElementById("frmcontactus").submit(); 
+   }
+  }
+</script>
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class= "row" style="background-image:url( ../static/images/contact.jpg);background-color: rgba(0,0,0,0.8);background-size:cover; background-position: center; background-repeat:no-repeat;background-attachment:fixed; ">
+
+  <h2 style="text-align:center; font-size:55px;"> <b>Contact Us</b></h2>
+  <form class="form-group" method="post" id="frmcontactus"  onsubmit="event.preventDefault(); validate();"action="{% url 'nouapp:contactus'%}">
+     {% csrf_token %}
+     
+     <table class="table text-light table-bordered" style="width:80%;margin:auto; background-color:pink;">
+
+            <tr>
+            <td>Enter Name</td>
+            <td><input id="name" class="form-control" type="text" name="name" placeholder="Enter Name"/></td>
+            </tr>
+            <tr>
+                <td>Select Gender</td>
+                <td><input class="form-check-input" type="radio" name="gender"  value="male"/>Male
+                <input class="form-check-input" type="radio" name="gender"  value="female"/>Female</td>
+                </tr>
+          <tr>
+            <td>Address</td>
+            <td><textarea name="address" class="form-control"></textarea></td>
+          </tr>
+          <tr>
+            <td>Enter Contact Number</td>
+            <td><input id="contactno" type="text" name="contactno" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Enter Email Address</td>
+            <td>
+                <input id="emailaddress" type="text" name="emailaddress" class="form-control"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Enter Enquiry Text</td>
+            <td><textarea name="enquirytext" class="form-control"/></textarea></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><button type="submit" class="btn btn-success">Submit</button></td>
+          </tr>
+    </table>
+</form>
+</div>
+{% endblock main %}

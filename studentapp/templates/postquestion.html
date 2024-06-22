@@ -1,0 +1,44 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Discussion Foram</h1> 
+                <form class ="form-group "  method="post"  action={%url 'studentapp:postquestion' %}>
+                    {% csrf_token %}
+                    <table class="table table-bordered text-light " style="width:70%;margin=auto;">
+                        <tr>
+                            <td>ENTER QUESTION</td>
+                            <td>
+                                <textarea class="form-control text-light" name="question"></textarea>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td  colspan="2" ><center><button type="submit" class="btn btn-success">POST</button></center></td>
+                        </tr>
+                    </table>
+                </form>
+              <br/>
+              <br/>
+              <table class="table table-bordered text-light" style="width:100%;margin=auto;">
+                <tr>
+                    <th>Q.No</th>
+                    <th>Question</th>
+                    <th>Posted By</th>
+                    <th>Posted date</th>
+                    <th>Post Answer</th>
+                    <th>View Answer</th>
+                </tr>
+                {% for q in ques %}
+                    <tr>
+                        <td>{{q.qid}}</td>
+                        <td>{{q.question}}</td>
+                        <td>{{q.postedby}}</td>
+                        <td>{{q.posteddate}}</td>
+                        <td><center><a href="{% url 'studentapp:postanswer' qid=q.qid %}"><button class="btn btn-primary" type="submit">Post</button></a></center></td>
+                        <td><center><a href="{%url 'studentapp:viewanswer' qid=q.qid %}"><button class="btn btn-primary" type="submit">View</button></a></center></td>
+                    </tr>
+                {% endfor %}
+              </table>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,63 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Student Home</h1>                 
+<div class="jumbotron my-4">
+  <form class="form" autocomplete="off" id="frmtest" onsubmit="return saveAns();" action={% url 'studentapp:calculatemarks'%} method="POST">
+    {% csrf_token %}
+    <h1 style="text-align: center;">{{course.course_name}}</h1>
+    {% for q in questions%}
+      <h3 class="text-info">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[Marks {{q.marks}}]</h4>
+      
+      <div class="form-check mx-4 my-2">
+        <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option1}}" value="{{q.option1}}" required>
+        {{q.option1}}
+      </div>
+
+
+      <div class="form-check mx-4">
+        <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="{{q.option2}}" required>
+          {{q.option2}}
+      </div>
+
+      
+      <div class="form-check mx-4">
+        <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="{{q.option3}}" required>
+          {{q.option3}}
+      </div>
+
+
+      <div class="form-check mx-4">
+        <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="{{q.option4}}" required>
+          {{q.option4}}
+      </div>
+      <br/><br/>
+      {% endfor %}
+      <br/>
+      <input class="btn btn-info btn-lg"   type="submit" value="Submit">  
+  </form>   
+    <br/>
+</div>
+</div>
+<script> 
+function saveAns(){  
+var ele = document.getElementsByTagName('input'); 
+for(i = 0; i < ele.length; i++) {  
+      if(ele[i].checked){       
+        setCookie(ele[i].name,ele[i].value,3)
+  } 
+} 
+
+}
+
+function setCookie(cname, cvalue, exdays) {
+var d = new Date();
+d.setTime(d.getTime() + (exdays*24*60*60*3));
+var expires = "expires="+ d.toUTCString();
+document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+</script> 
+</div>
+</div>
+{% endblock body %}

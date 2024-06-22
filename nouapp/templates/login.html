@@ -1,0 +1,75 @@
+{% extends 'parent.html' %}
+{% block main %}
+{% load static %}
+<script>
+    function validate()
+    {
+        var userid=document.getElementById("userid");
+        var password=document.getElementById("password");
+        var usertype=document.getElementById("usertype");
+        if (userid.value==""||userid.value==null)
+        {
+            alert("Please Enter User Id");
+            userid.focus();
+        }
+        else if(password.value==""||password.value==null)
+        {
+            alert("Please Enter Password");
+            password.focus();
+        }
+        
+        else
+        {
+                document.getElementById("frmlogin").submit(); 
+        }
+    }
+</script>
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="row m-0 p-0" >
+ 
+    <div class="col-sm-4" style=" background-color:white;">
+       <img src="{% static 'images/st.png'%}" style="height:200px;width:300px;"/>
+    </div>
+    <div class="col-sm-8">
+       <h2 style="text-align:center;"><b>Login Form</b></h2>
+      <form class="form-group" id="frmlogin" onsubmit="event.preventDefault();validate();" method="post" action="{% url 'nouapp:login' %}">
+       {% csrf_token%}
+       <table style="width:80%; margin:auto;">
+           <tr>
+               <td>Enter User Id/Roll no</td>
+               <td><input type="text" name="userid" class="form-control" id="userid"/></td>
+           
+           </tr>
+           <tr>
+               <td>Enter Password</td>
+               <td><input type="password" name="password" class="form-control" id="password"/></td>
+           </tr>
+           <tr>
+               <td>Select User Type</td>
+               <td>
+                   <select name="usertype" class="form-control" >
+                       <option selected>--user Type--</option>
+                       <option value="student">Student</option>
+                       <option value="admin">Administrator</option>
+                   </select>
+               </td>
+           </tr>
+           <tr>
+               <td>&nbsp;</td>
+               <td>
+                 <button type="submit" class="btn btn-success" >Submit</button>
+               </td>
+           </tr>
+       </table>
+   
+    </form>
+   </div>
+
+{% endblock main %}

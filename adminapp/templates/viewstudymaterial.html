@@ -1,0 +1,42 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <h1 style="text-align:center;">View Study Materials</h1>   
+        <div class="col-sm-12" style="overflow-x: scroll;">
+            <table class="table table-bordered text-light">
+                <tr>
+                    <th>#</th>
+                    <th>program</th>
+                    <th>Branch</th>
+                    <th>year</th>
+                    <th>Subject</th>
+                    <th>File Name</th>
+                    <th>File</th>
+                    <th>Download</th>
+                </tr>
+                {% for m in materials %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        
+                        <td>
+                            {{m.program}}
+                        </td>
+                        <td>
+                            {{m.branch}}
+                        </td>
+                        <td>
+                            {{m.year}}
+                        </td>
+                        <td>
+                            {{m.subject}}
+                        </td>
+                        <td>{{m.file_name}}</td>
+                        <td>{{m.my_file}}</td>
+                        <td><a download href="{{m.my_file.url}}">Download</a></td>
+                    </tr>
+                {% endfor %}
+               
+            </table>
+        </div>
+    </div>
+{% endblock body %}
